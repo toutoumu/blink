@@ -1,0 +1,6 @@
+{
+    "desc": "引用组件",
+    "usingComponents": {
+        "v-like": "/components/like/index"
+    }
+}
