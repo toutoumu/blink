@@ -1,2 +1,6 @@
 <!--components/like/index.wxml-->
-<image src='images/like.png' class='container'></image>
+<!-- bind不阻止冒泡事件, catch事件会阻止冒泡 -->
+<view bind:tap='onLike' class='container'>
+    <image src='{{like?yesSrc:noSrc}}'></image>
+    <text>{{count}}</text>
+</view>

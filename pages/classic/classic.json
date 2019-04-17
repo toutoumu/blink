@@ -1,6 +1,11 @@
 {
     "desc": "引用组件",
     "usingComponents": {
-        "v-like": "/components/like/index"
+        "v-like": "/components/like/index",
+        "v-epsoide": "/components/epsoide/index",
+        "v-navi": "/components/navi/index",
+        "v-movie": "/components/classic/movie/index",
+        "v-music": "/components/classic/music/index",
+        "v-essay": "/components/classic/essay/index"
     }
 }

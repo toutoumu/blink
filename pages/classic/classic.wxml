@@ -1,3 +1,12 @@
-<!--pages/classic/classic.wxml-->
-
-<v-like></v-like>
+<view class="container">
+    <!-- 使用bind:like 绑定v-like触发的like事件 -->
+    <view class="header">
+        <v-epsoide class='epsoide' index='{{classics.index}}'></v-epsoide>
+        <v-like class="like" bind:like='onLick' like='{{likeStatus}}' count='{{likeCount}}' />
+    </view>
+    <v-movie hidden="{{classics.type !=100}}" img='{{classics.image}}' content='{{classics.content}}' />
+    <v-essay hidden="{{classics.type !=200}}" img='{{classics.image}}' content='{{classics.content}}' />
+    <!-- hidden="{{classics.type !=300}}" -->
+    <v-music wx:if="{{classics.type ==300}}" img='{{classics.image}}' content='{{classics.content}}' src='{{classics.url}}' />
+    <v-navi class="navi" bind:left='onNext' bind:right='onPrevious' title='{{classics.title}}' first='{{first}}' latest='{{latest}}'></v-navi>
+</view>

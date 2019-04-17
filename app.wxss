@@ -1,0 +1,8 @@
+/* 页面最外层会加上page,所以直接设置page的字体即可 */
+
+page {
+    font-family: "PingFangSC-Thin";
+    font-size: 32rpx;
+    /* 这个样式不会被继承 */
+    /* background: lightblue; */
+}
