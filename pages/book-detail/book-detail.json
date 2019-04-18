@@ -1,5 +1,7 @@
 {
   "usingComponents": {
-    "v-tag":"/"
+    "v-tag": "/components/tag/index",
+    "v-like": "/components/like/index",
+    "v-mask": "/components/mask/index"
   }
 }

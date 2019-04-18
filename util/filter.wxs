@@ -1,0 +1,17 @@
+// 不能使用const 不支持es6语法
+var formart = function (text) {
+    if (!text) return
+    // 匹配所有的 \\n 
+    // var reg = getRegExp('\\\\n', 'g')
+    var reg = getRegExp('\n', 'g')
+    return text.replace(reg, '\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;')
+}
+
+var limit = function (array, len) {
+    return array.slice(0, len)
+}
+
+module.exports = {
+    formart: formart,
+    limit: limit
+}

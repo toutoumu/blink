@@ -1,3 +1,4 @@
+<wxs src="../../util/filter.wxs" module="dd"></wxs>
 <view class="container">
     <view class="head">
         <image class="img" src='{{book.image}}' />
@@ -6,14 +7,75 @@
     </view>
     <view class="sub-container">
         <text class="headline">短评</text>
+        <text class="shadow" wx:if="{{comments == false}}">还没有短评</text>
+        <view class="comment-container">
+            <block wx:for="{{dd.limit(comments,15)}}" wx:key="content">
+                <!-- tag-class="ex-tag" 给组件的样式赋值 -->
+                <v-tag text="{{item.content}}" tag-class="{{cc.hightlight(index)}}">
+                    <text class="num" slot="after">{{'+' + item.nums}}</text>
+                </v-tag>
+            </block>
+        </view>
     </view>
     <view class="sub-container">
-        <text class="headline">短评</text>
-        <block wx:for="{{comments}}">
-            <text>{{item}}</text>
-        </block>
+        <text class="headline">内容简介</text>
+        <!-- <text class="content" decode="{{true}}">{{book.summary}}</text> -->
+        <!-- 下面这样调用wxs -->
+        <text class="content" decode="{{true}}">{{dd.formart(book.summary)}}</text>
     </view>
     <view class="sub-container">
-        <text class="headline">短评</text>
+        <text class="headline">书本信息</text>
+        <view class="detail_container">
+            <view class="vertical description">
+                <text>出版社</text>
+                <text>标题</text>
+                <text>定价</text>
+                <text>出版社</text>
+            </view>
+            <view class="vertical">
+                <text>{{book.author}}</text>
+                <text>{{book.title}}</text>
+                <text>{{book.fav_nums}}</text>
+                <text>{{book.id}}</text>
+            </view>
+        </view>
     </view>
 </view>
+<view wx:if="{{!posting}}" class="post-container">
+    <view bind:tap="onFackPost" class="post-fake">
+        <text class="">输入短评</text>
+    </view>
+    <view class="like-container">
+        <v-like class="like" like="{{likeStatus}}" count="{{likeCount}}" bind:like="onLike"></v-like>
+    </view>
+</view>
+<view wx:if="{{posting}}" class="posting-container">
+    <view class="post-header">
+        <text wx:if="{{comments == true}}">仅可点击标签+1</text>
+        <text wx:else class="shadow">暂无短评</text>
+        <text class="cancel" bind:tap="cancel">取消</text>
+    </view>
+    <view class="comment-container">
+        <block wx:for="{{dd.limit(comments,3)}}" wx:key="content">
+            <v-tag bind:onTap="onPost" text="{{item.content}}" tag-class="{{cc.hightlight(index)}}">
+                <text class="num" slot="after">{{'+' + item.nums}}</text>
+            </v-tag>
+        </block>
+    </view>
+    <input bind:confirm="onPost" class="post" type="text" placeholder="短评最多12个字" maxlength="12"></input>
+</view>
+<v-mask wx:if="{{posting}}"></v-mask>
+<wxs module="cc">
+    var hightlight = function(index){
+        if(index ==0){
+            return 'ex-tag0'
+        }
+        if(index ==1){
+            return 'ex-tag1'
+        }
+        return ''
+    }
+    module.exports={
+        hightlight:hightlight
+    }
+</wxs>
