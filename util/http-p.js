@@ -9,37 +9,37 @@ const tips = {
 }
 
 class HTTP {
-    request(params) {
-        if (!params.method) {
-            params.method = 'GET'
-        }
+    request({ url, data = {}, method = 'GET' }) {
+        return new Promise((resolve, reject) => {
+            this._request(url, resolve, reject, data)
+        })
+    }
+    _request(url, resolve, reject, data = {}, method = 'GET') {
         wx.request({
-            url: config.api_base_url + params.url,
-            data: params.data,
+            url: config.api_base_url + url,
             header: {
                 'content-type': 'application/json'
             },
-            method: params.method,
+            method: method,
+            data: data,
             // dataType: 'json',
             // responseType: 'text',
             success: (res) => {
-                console.log(res);
-                
                 let code = res.statusCode.toString()
                 if (code.startsWith('2')) {
-                    if (params.success) {
-                        params.success(res.data)
-                    }
+                    resolve(res.data)
                 } else {
-                    let code = res.data.error_code
+                    reject()
+                    code = res.data.error_code
                     this._show_error(code)
                 }
             },
             fail: (err) => {
+                reject()
                 console.log(err)
                 this._show_error(1)
             },
-            complete: (res) => {},
+            complete: (res) => { },
         })
     }
 
@@ -48,7 +48,7 @@ class HTTP {
             error_code = 1
         }
         wx.showToast({
-            title: tips[error_code],
+            title: tips[error_code] ? tips[error_code] : tips[1],
             icon: 'none',
             duration: 2000
         })

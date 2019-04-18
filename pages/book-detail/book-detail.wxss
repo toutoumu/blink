@@ -1,0 +1,52 @@
+.container {
+    background: #f5f5f5;
+    width: 100%;
+}
+
+.head {
+    background: #ffffff;
+    padding-top: 40rpx;
+    padding-bottom: 40rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    color: #2f2f2f;
+    margin-top: 20rpx;
+    font-size: 38rpx;
+    font-weight: 600;
+}
+
+.author {
+    font-size: 28rpx;
+    color: #999999;
+}
+
+.head image {
+    width: 200rpx;
+    height: 300rpx;
+}
+
+.sub-container {
+    width: 690rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30rpx;
+    background: #ffffff;
+    padding: 30rpx;
+}
+
+.headlin {
+    font-size: 30rpx;
+    font-weight: 600;
+    color: #2f2f2f;
+    margin-bottom: 20rpx;
+}
+
+.sub-container{
+    display: flex;
+    
+}
