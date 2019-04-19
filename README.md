@@ -19,3 +19,6 @@
 ### wxs 只能用相对路径
 
 <wxs src="../../util/filter.wxs"></wxs>
+
+绑定事件 bind:tap="事件名称"
+绑定属性 text="{{属性名称}}"

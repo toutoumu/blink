@@ -3,6 +3,15 @@ import {
 } from '../util/http-p.js'
 
 class BookModel extends HTTP {
+    search(start, q) {
+        return this.request({
+            url: '/book/search?summary=1',
+            data: {
+                q: q,
+                start: start
+            }
+        })
+    }
 
     getHotList() {
         return this.request({

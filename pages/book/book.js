@@ -1,5 +1,6 @@
 // pages/book/book.js
 import { BookModel } from '../../models/Book.js'
+import { random } from '../../util/common.js'
 const bookModel = new BookModel()
 
 Page({
@@ -8,9 +9,20 @@ Page({
      * 页面的初始数据
      */
     data: {
-        books: []
+        books: [],
+        searching: false,
+        more: ''
     },
-
+    onSearch() {
+        this.setData({
+            searching: true
+        })
+    },
+    onCancel() {
+        this.setData({
+            searching: false
+        })
+    },
     /**
      * 生命周期函数--监听页面加载
      */
@@ -70,5 +82,12 @@ Page({
      */
     onShareAppMessage: function () {
 
+    },
+    // 滑动到底部监听
+    onReachBottom() {
+        // 滑动到底部加载更多
+        this.setData({
+            more: random(16)
+        })
     }
 })

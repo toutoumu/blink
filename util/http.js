@@ -23,8 +23,6 @@ class HTTP {
             // dataType: 'json',
             // responseType: 'text',
             success: (res) => {
-                console.log(res);
-                
                 let code = res.statusCode.toString()
                 if (code.startsWith('2')) {
                     if (params.success) {
