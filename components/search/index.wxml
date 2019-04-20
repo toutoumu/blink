@@ -38,7 +38,7 @@
             <v-book book='{{item}}'></v-book>
         </block>
     </view>
-    <v-loading class="loading-center"></v-loading>
+    <v-loading class="loading-center" wx:if="{{loadingCenter}}"></v-loading>
     <v-loading class="loading" wx:if="{{loading}}"></v-loading>
     <text class="empty-tip" wx:if="{{noneResult}}">没有搜索到书籍</text>
 </view>

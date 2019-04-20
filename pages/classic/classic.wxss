@@ -30,3 +30,19 @@
     bottom: 40rpx;
 
 }
+
+.like-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.share-btn {
+    margin-top: 12rpx;
+    margin-right: 20rpx;
+}
+
+.share {
+    width: 40rpx;
+    height: 40rpx;
+}

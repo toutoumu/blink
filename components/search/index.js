@@ -25,8 +25,7 @@ Component({
         historyWords: [],
         hotWords: [],
         keyword: '',
-        loading: false,
-        loadingCenter: true
+        loadingCenter: false
     },
     attached() {
         this.setData({
@@ -44,8 +43,8 @@ Component({
      */
     methods: {
         onCancel() {
-            this.triggerEvent('onCancel', {
-            }, {})
+            this.initialize()
+            this.triggerEvent('onCancel', {}, {})
         },
         onClear() {
             this.initialize()
@@ -53,21 +52,20 @@ Component({
                 searching: false,
                 keyword: ''
             })
-            this.triggerEvent('onClear', {
-            }, {})
         },
         onConfirm(event) {
             const word = event.detail.value || event.detail.text
             if (!word) return
-            this.initialize()
+
             this.setData({
                 searching: true,
-                loadingCenter: true,
-                keyword: word
+                loadingCenter: true, // 显示加载中
+                keyword: word // 搜索关键字
             })
+
             bookModel.search(0, word).then(res => {
-                keyModel.addToHistory(word)
-                this.setTotal(100)
+                keyModel.addToHistory(word) // 保存搜索历史
+                this.setTotal(word == 'aaa' ? 0 : 100)
                 this.setMoreData(res)
                 this.setData({
                     loadingCenter: false
@@ -81,22 +79,16 @@ Component({
         },
 
         loadMore() {
-            if (this.data.loading) return // 加载中
-            if (!this.hasMore()) return // 没有更多
             if (!this.data.keyword) return // 没有搜索关键字不触发搜索
+            if (this.locked()) return // 加载中
+            if (!this.hasMore()) return // 没有更多
 
-            this.setData({
-                loading: true
-            })
+            this.lock()
             bookModel.search(this.getCurrentStart(), this.data.keyword).then(res => {
-                this.setData({
-                    loading: false
-                })
+                this.unlock()
                 this.setMoreData(res)
             }, () => {// 调用失败
-                this.setData({
-                    loading: false
-                })
+                this.unlock()
             })
         }
     }

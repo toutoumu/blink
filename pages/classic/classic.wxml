@@ -2,7 +2,12 @@
     <!-- 使用bind:like 绑定v-like触发的like事件 -->
     <view class="header">
         <v-epsoide class='epsoide' index='{{classics.index}}'></v-epsoide>
-        <v-like class="like" bind:like='onLick' like='{{likeStatus}}' count='{{likeCount}}' />
+        <view class="like-container">
+            <v-like class="like" bind:like='onLick' like='{{likeStatus}}' count='{{likeCount}}' />
+            <v-button class="share-btn" open-type="share">
+                <image class="share" slot='img' src="/images/icon/share.png" />
+            </v-button>
+        </view>
     </view>
     <v-movie hidden="{{classics.type !=100}}" img='{{classics.image}}' content='{{classics.content}}' />
     <v-essay hidden="{{classics.type !=200}}" img='{{classics.image}}' content='{{classics.content}}' />

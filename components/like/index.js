@@ -13,7 +13,8 @@ Component({
         },
         count: {
             type: Number
-        }
+        },
+        readOnly:Boolean
     },
 
     /**
@@ -31,6 +32,9 @@ Component({
      */
     methods: {
         onLike(event) {
+            if (this.properties.readOnly) {
+                return
+            }
             let like = this.properties.like
             let count = this.properties.count
             like ? count-- : count++
