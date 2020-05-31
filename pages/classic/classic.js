@@ -16,6 +16,11 @@ Page({
         this._updateClassic('next')
     },
     onPrevious() {
+        wx.getUserInfo({
+            success:res=>{
+
+            }
+        })
         this._updateClassic('previous')
     },
     // 获取文章
